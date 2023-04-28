@@ -13,19 +13,19 @@ app.use(function (req, res, next) {
 });
 const port = 5000;
 
-const jsonData = require("../TechTestJson.json");
+const candidates = require("./TechTestJson.json");
 
-app.get("/data", (req, res) => {
+app.get("/candidates", (req, res) => {
   const { fromDate, candidate, location } = req.query;
-  return dataModule([...jsonData], fromDate, candidate, location, req, res);
+  return dataModule([...candidates], fromDate, candidate, location, req, res);
 });
 
-app.get("/data/:Title", (req, res) => {
-  const title = req.params.Title;
-  const filteredData = jsonData.find(
-    (item) => item.title.toLowerCase() === title.toLowerCase()
+app.get("/candidates/:title", (req, res) => {
+  const title = req.params.title;
+  const filteredcandidate = candidates.find(
+    (candidate) => candidate.title.toLowerCase() === title.toLowerCase()
   );
-  res.json(filteredData);
+  res.json(filteredcandidate);
 });
 
 app.listen(port, () => {
